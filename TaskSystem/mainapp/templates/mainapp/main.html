@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/task.css' %}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
@@ -19,7 +20,7 @@
           <li><a href="#" class="nav-link px-2 text-secondary">Главная</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Создать задачу</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Мои задачи</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Пользователь</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">{{ user.username }}</a></li>
 
         </ul>
 
@@ -28,12 +29,15 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Выйти</button>
+          <a href="{% url 'auth:logout' %}" type="button" class="btn btn-outline-light me-2">Выйти</a>
 
         </div>
       </div>
     </div>
   </header>
+<br>
+<h3>Все задачи:</h3>
+{% include 'mainapp/includes/task_inc.html'%}
 
 </body>
 </html>

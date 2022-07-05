@@ -1,0 +1,10 @@
+{% load static %}
+
+{% for task in tasks %}
+
+<div class="task_container">
+  <p>Заголовок: {{task.title}} | Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p>Описание: </p>
+  <p>{{task.description}}</p>
+</div>
+{% endfor %}
