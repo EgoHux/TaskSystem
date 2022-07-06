@@ -21,11 +21,13 @@ from django.conf.urls.static import static
 from authapp import views as authapp
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', authapp.login, name="login"),
     path('main', mainapp.main, name ='main'),
-    path("auth/", include('authapp.urls', namespace = "auth")),
+    path("auth/", include('authapp.urls', namespace="auth")),
+    path('tasks/', include('mytasks.urls', namespace='tasks'))
 ]
 
 
