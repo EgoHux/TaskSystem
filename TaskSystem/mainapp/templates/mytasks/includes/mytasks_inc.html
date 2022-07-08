@@ -1,14 +1,15 @@
 {% load static %}
 
-{% for task in tasks %}
+{% for mytask in mytasks %}
 
 <div class="task_container">
-  <h4>Задача № {{task.id}}</h4>
-  <p> Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.get_status_display }} | Тип: {{ task.get_tasktype_display }}</p>
+
+  <p> Заказчик: {{mytask.task.author}} | Исполнитель: {{mytask.task.executor}} | Статус: {{ mytask.task.get_status_display }} | Тип: {{ mytask.task.get_tasktype_display }}</p>
   <p>Описание: </p>
-  <p>{{task.description}}</p>
-  <p>{{task.files}}</p>
-  <a href="{% url 'mytasks:delete' %}">Взять задачу</a>
+  <p>{{mytask.task.description}}</p>
+  <p>{{mytask.task.files}}</p>
+
+  <a href="{% url 'mytasks:delete' mytask.id %}">Убрать задачу</a>
   <hr>
   <h4>Комментарии</h4>
   {% for comment in comments %}
