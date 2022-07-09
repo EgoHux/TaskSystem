@@ -1,0 +1,19 @@
+{% load static %}
+
+{% include 'mainapp/includes/menu_inc.html'%}
+<br>
+<h3>Создать задачу:</h3>
+
+
+<form class="pure-form" action="{% url 'create' %}" method="post">
+    {% csrf_token %}
+    <p>{{error}}</p>
+    {{ form.as_p }}
+
+<br>
+    <input class="pure-button pure-button-primary" type="submit" value="Создать задачу">
+</form>
+
+
+</body>
+</html>

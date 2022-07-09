@@ -3,7 +3,7 @@
 {% for mytask in mytasks %}
 
 <div class="task_container">
-
+  <h4>Задача № {{mytask.task.id}}</h4>
   <p> Заказчик: {{mytask.task.author}} | Исполнитель: {{mytask.task.executor}} | Статус: {{ mytask.task.get_status_display }} | Тип: {{ mytask.task.get_tasktype_display }}</p>
   <p>Описание: </p>
   <p>{{mytask.task.description}}</p>

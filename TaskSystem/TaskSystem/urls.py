@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', authapp.login, name="login"),
     path('main', mainapp.main, name ='main'),
+    path('create', mainapp.create_task, name='create'),
     path("auth/", include('authapp.urls', namespace="auth")),
     path('tasks/', include('mytasks.urls', namespace='tasks'))
 ]
