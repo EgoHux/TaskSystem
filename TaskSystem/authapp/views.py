@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import auth
-from authapp.forms import CustomUserLoginForm
+from authapp.forms import CustomUserLoginForm, CustomUserCreationForm
 
 # Create your views here.
 
@@ -31,4 +31,17 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('login'))
 
+
+def register(request):
+    form = CustomUserCreationForm()
+    if request.method =='POST':
+        form = CustomUserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('login'))
+
+    return render(request, 'authapp/register.html', context={
+        'title': 'Регистрация аккаунта',
+        'form': form
+    })
 

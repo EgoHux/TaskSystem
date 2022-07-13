@@ -36,21 +36,26 @@
 				<span class="login100-form-title p-b-41">
 					Вход в систему
 				</span>
-				<form class="login100-form validate-form p-b-33 p-t-5" action="{% url 'login' %}" method="post">
+				<form class="login100-form validate-form p-b-33 p-t-5" action="{% url 'auth:register' %}" method="post">
 					{% csrf_token %}
 
+
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="User name">
+						<input class="input100" type="text" name=username placeholder="Пользователь">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" name="password1" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
-					<a href="{% url 'auth:register' %}">Нет аккаунта? Зарегестрироваться</a>
+
+					<div class="wrap-input100 validate-input" data-validate="Reset password">
+						<input class="input100" type="password" name="password2" placeholder="Reset Password">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
 					<div class="container-login100-form-btn m-t-32">
-						<input class="login100-form-btn" type="submit" value="Войти"/>
+						<input class="login100-form-btn" type="submit" value="Зарегестрироваться"/>
 
 					</div>
 
