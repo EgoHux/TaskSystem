@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'authapp',
-    'mytasks'
+    'mytasks',
+    'edit_directory'
 ]
 
 MIDDLEWARE = [

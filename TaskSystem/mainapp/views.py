@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Task, Comment
 from .forms import TaskForm
+
 # Create your views here.
 
 
@@ -29,3 +31,5 @@ def create_task(request):
         'form': TaskForm(),
         'error': error
     })
+
+

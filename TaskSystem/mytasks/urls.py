@@ -10,4 +10,5 @@ urlpatterns = [
     path('add/<int:task_id>', mytasks.add, name='add'),
     path('delete/<int:mytask_id>', mytasks.delete, name='delete')
 
+
 ]

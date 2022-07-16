@@ -1,0 +1,20 @@
+{% load static %}
+
+{% include 'mainapp/includes/menu_inc.html' %}
+
+
+<h3>Редактирование Стастусов</h3>
+
+{% for status in statuses %}
+<p >{{status.name}} <a href="{% url 'edit_directory:edit_status' status.id %}">Изменить</a>  </p>
+{% include 'edit_directory/edit_status.html' %}
+<hr>
+{% endfor %}
+<h3>Редактирование Типов заявки</h3>
+{% for tasktype in tasktypes %}
+<p >{{tasktype.name}} <a href="{% url 'edit_directory:edit_tasktype' tasktype.id %}">Изменить</a>  </p>
+{% include 'edit_directory/edit_tasktype.html' %}
+<hr>
+{% endfor %}
+
+

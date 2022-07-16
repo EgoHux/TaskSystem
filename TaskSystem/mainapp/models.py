@@ -1,11 +1,8 @@
-
 from django.db import models
 from authapp.models import CustomUser
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-
-
-
+from edit_directory.models import TaskType, Status
 
 class Task(models.Model):
 
@@ -30,8 +27,10 @@ class Task(models.Model):
     executor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, verbose_name="Исполнитель", default=None, related_name='executors')
     description = models.TextField("Описание", max_length=250, default="")
     files = models.FileField(upload_to="files/", verbose_name="Файлы", blank=True, default=None)
-    tasktype = models.CharField(choices=TASK_TYPE_CHOICES, max_length=2, verbose_name="Тип задачи", default="UP")
-    status = models.CharField(choices=STATUS_CHOICES, max_length=2, verbose_name="Статус", default="EX")
+    # tasktype = models.CharField(choices=TASK_TYPE_CHOICES, max_length=2, verbose_name="Тип задачи", default="UP")
+    tasktype = models.ForeignKey(TaskType, on_delete=models.DO_NOTHING, verbose_name="Тип заявки", default=None)
+    status = models.ForeignKey(Status, on_delete=models.DO_NOTHING, verbose_name="Статус", default=None)
+    # status = models.CharField(choices=STATUS_CHOICES, max_length=2, verbose_name="Статус", default="EX")
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -58,17 +57,3 @@ class Comment(models.Model):
 
 
 
-class Status(models.Model):
-    COLOR_CHOICES = [
-        ("GR", "Зеленый"),
-        ("RD", "Красный"),
-        ("YE", "Желтый"),
-        ("DR", "Серый")
-    ]
-    name = models.CharField(verbose_name="Название статуса", max_length=50, default=None)
-    comment_is_active = models.BooleanField(verbose_name="Возможность комментировать", default=False)
-    color_status = models.CharField(verbose_name="Цвет статуса", choices=COLOR_CHOICES, max_length=2, default= "DR")
-    image_status = models.ImageField(verbose_name="Иконка статуса", upload_to='image_status/', default=None)
-
-    def __str__(self):
-        return self.name

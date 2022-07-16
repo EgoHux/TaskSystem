@@ -7,3 +7,7 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("author", "executor", "description", "files", "tasktype", "status",)
+
+
+
+
