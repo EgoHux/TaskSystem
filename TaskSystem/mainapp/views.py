@@ -1,7 +1,11 @@
+from django.db.models import Model
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.http.response import HttpResponseRedirect
 from .models import Task, Comment
 from .forms import TaskForm
+from authapp.models import CustomUser, UserData
+from authapp.forms import CustomUserChangeForm, UserDataForm
 
 # Create your views here.
 
@@ -32,4 +36,45 @@ def create_task(request):
         'error': error
     })
 
+def all_users(request):
+    users = CustomUser.objects.all()
+    usersdata = UserData.objects.all()
+    non_active_user = CustomUser.objects.filter(is_active=False)
+    return render(request, 'mainapp/all_users.html', context={
+        'title':"Все пользователи",
+        'users': users,
+        'userdata': usersdata,
+        'non_active_user': non_active_user
+
+    })
+
+def edit_user(request, user_id):
+    user = CustomUser.objects.get(id=user_id)
+
+    try:
+        userdata = UserData.objects.get(user=user_id)
+    except:
+        userdata = UserData.objects.create(user=user, gender="M")
+
+    userform = CustomUserChangeForm(instance=user)
+    userdataform = UserDataForm(instance=userdata)
+
+    if request.method =='POST':
+
+        userform = CustomUserChangeForm(instance=user, data=request.POST)
+        userdataform = UserDataForm(data=request.POST, instance=userdata)
+
+        if userform.is_valid() and userdataform.is_valid():
+            userform.save()
+
+            userdataform.save()
+
+            return HttpResponseRedirect(reverse('all_users'))
+
+    return render(request, 'mainapp/edit_user.html', context={
+        'title':'Изменить пользователя',
+        'userform':userform,
+        'userdataform': userdataform,
+        'userdata':userdata
+    })
 

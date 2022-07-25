@@ -1,0 +1,12 @@
+{% load static %}
+{% include 'mainapp/includes/menu_inc.html' %}
+<h3>Все пользователи</h3>
+{% for user in users %}
+
+<ul><a href ="{% url 'edit_user' user.id %}">{{user.username}}</a></ul>
+{% endfor %}
+
+<h3>Требуют активации</h3>
+{% for user in non_active_user %}
+<ul><p> Статус {{user.username}} - {{user.is_active}}</p></ul>
+{% endfor %}

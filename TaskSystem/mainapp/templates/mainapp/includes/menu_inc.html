@@ -22,15 +22,20 @@
           <li><a href="{% url 'main' %}" class="nav-link px-2 text-secondary">Главная</a></li>
           <li><a href="{% url 'create' %}" class="nav-link px-2 text-white">Создать задачу</a></li>
           <li><a href="{% url 'mytasks:view' %}" class="nav-link px-2 text-white">Мои задачи</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">{{ user.username }}</a></li>
           <li><a href="{% url 'edit_directory:view' %}" class="nav-link px-2 text-white">Редактирование справочников</a></li>
+          <li><a href="{% url 'all_users' %}" class="nav-link px-2 text-white">Все пользователи</a></li>
 
         </ul>
 
 
 
         <div class="text-end">
-          <a href="{% url 'auth:logout' %}" type="button" class="btn btn-outline-light me-2">Выйти</a>
+          <a href="#" class="nav-link px-2 text-white">{{ user.username }}</a>
+          <ul>
+              <li><a href="#" class="nav-link px-2 text-white">> Аккаунт </a></li>
+              <li><a href="{% url 'auth:logout' %}" class="nav-link px-2 text-white">> Выйти </a></li>
+            </ul>
+
 
         </div>
       </div>

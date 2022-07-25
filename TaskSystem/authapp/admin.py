@@ -6,8 +6,8 @@ from .models import CustomUser
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = [ 'username', 'password']
-    fields = ('username', 'password')
+    list_display = [ 'username', 'password', 'is_active']
+    fields = ('username', 'password', 'is_active')
 
 
 

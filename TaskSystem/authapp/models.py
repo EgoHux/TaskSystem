@@ -11,6 +11,7 @@ class Type(models.Model):
 
 class CustomUser(AbstractUser):
     LastAuthDate = models.DateField(auto_now=True)
+    is_active = models.BooleanField(verbose_name="Пользователь активирован", default=False)
 
 
 

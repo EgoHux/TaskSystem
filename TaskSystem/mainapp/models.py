@@ -6,31 +6,12 @@ from edit_directory.models import TaskType, Status
 
 class Task(models.Model):
 
-    TASK_TYPE_CHOICES = [
-        ("ER", "Ошибка"),
-        ("UP", "Предложение"),
-        ("OT", "Другое")
-
-
-    ]
-
-    STATUS_CHOICES = [
-        ("EX", "В ожидании"),
-        ("AC", "В производстве"),
-        ("MD", "Сделан"),
-        ("NI", "Требует доработки"),
-        ("FL", "Отклонен")
-
-    ]
-
     author = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING, verbose_name="Автор", default=get_user_model(), related_name='authors')
     executor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, verbose_name="Исполнитель", default=None, related_name='executors')
     description = models.TextField("Описание", max_length=250, default="")
     files = models.FileField(upload_to="files/", verbose_name="Файлы", blank=True, default=None)
-    # tasktype = models.CharField(choices=TASK_TYPE_CHOICES, max_length=2, verbose_name="Тип задачи", default="UP")
     tasktype = models.ForeignKey(TaskType, on_delete=models.DO_NOTHING, verbose_name="Тип заявки", default=None)
     status = models.ForeignKey(Status, on_delete=models.DO_NOTHING, verbose_name="Статус", default=None)
-    # status = models.CharField(choices=STATUS_CHOICES, max_length=2, verbose_name="Статус", default="EX")
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
