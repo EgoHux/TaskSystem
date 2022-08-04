@@ -1,0 +1,11 @@
+{% load static %}
+
+{% include 'mainapp/includes/menu_inc.html' %}
+
+
+<form method="post">
+  {% csrf_token %}
+  <h3>Создание пользователя</h3>
+  {{userform.as_p}}
+  <input type="submit" value="Создать пользователя">
+</form>

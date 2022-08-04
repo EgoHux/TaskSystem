@@ -48,8 +48,11 @@
 						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
-					{% if errors %}
-					{{error}}
+
+					{% if not request.user.is_active %}
+					<p class="user-activate"> Пользователь не активирован!  </p>
+					{% else %}
+					<p>Пользователь активирован</p>
 					{% endif %}
 					<a href="{% url 'auth:register' %}">Нет аккаунта? Зарегестрироваться</a>
 					<div class="container-login100-form-btn m-t-32">

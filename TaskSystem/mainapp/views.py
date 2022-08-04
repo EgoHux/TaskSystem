@@ -1,17 +1,18 @@
 from django.db.models import Model
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from .models import Task, Comment
 from .forms import TaskForm
 from authapp.models import CustomUser, UserData
 from authapp.forms import CustomUserChangeForm, UserDataForm
-
+from django.utils.timezone import now
 # Create your views here.
 
 
 
 def main(request):
+    CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
     tasks = Task.objects.all()
     comments = Comment.objects.all()
     return render(request, 'mainapp/main.html', context={
@@ -38,6 +39,7 @@ def create_task(request):
 
 def all_users(request):
     users = CustomUser.objects.all()
+
     usersdata = UserData.objects.all()
     non_active_user = CustomUser.objects.filter(is_active=False)
     return render(request, 'mainapp/all_users.html', context={
@@ -74,7 +76,12 @@ def edit_user(request, user_id):
     return render(request, 'mainapp/edit_user.html', context={
         'title':'Изменить пользователя',
         'userform':userform,
-        'userdataform': userdataform,
-        'userdata':userdata
+        'userdataform': userdataform
     })
 
+def delete_user(request, user_id):
+    user = CustomUser.objects.get(id=user_id)
+    #userdata = get_object_or_404(UserData, user=user_id)
+    user.delete()
+    #userdata.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

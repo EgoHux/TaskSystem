@@ -1,9 +1,13 @@
 {% load static %}
 {% include 'mainapp/includes/menu_inc.html' %}
 <h3>Все пользователи</h3>
+<hr>
+<a href ="{% url 'auth:create_user' %}" >Создать пользователя </a>
+<hr>
+
 {% for user in users %}
 
-<ul><a href ="{% url 'edit_user' user.id %}">{{user.username}}</a></ul>
+<ul>{{user.username}} - {{user.LastAuthDate}} <a href ="{% url 'edit_user' user.id %}">Изменить  </a>  <a href ="{% url 'delete_user' user.id %}">Удалить </a> </ul>
 {% endfor %}
 
 <h3>Требуют активации</h3>
