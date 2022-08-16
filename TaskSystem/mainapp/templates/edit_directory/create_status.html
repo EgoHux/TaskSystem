@@ -1,0 +1,19 @@
+{% load static %}
+
+{% include 'mainapp/includes/menu_inc.html' %}
+
+
+<h3>Создать Статус:</h3>
+
+
+<form class="third" action="{% url 'edit_directory:create_status' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+<br>
+    <input class="button" type="submit" value="Создать статус">
+</form>
+</div>
+
+</body>
+</html>
