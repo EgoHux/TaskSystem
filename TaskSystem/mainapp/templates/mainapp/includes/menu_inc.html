@@ -25,9 +25,10 @@
           <li><a href="{% url 'main' %}" class="{% if request.resolver_match.url_name == 'main' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}" >Главная</a></li>
           <li><a href="{% url 'create' %}" class="{% if request.resolver_match.url_name == 'create' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Создать задачу</a></li>
           <li><a href="{% url 'mytasks:task_view' %}" class="{% if request.resolver_match.url_name == 'task_view' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Мои задачи</a></li>
+          {% if request.user.is_superuser %}
           <li><a href="{% url 'edit_directory:directory_view' %}" class="{% if request.resolver_match.url_name == 'directory_view' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Редактирование справочников</a></li>
           <li><a href="{% url 'all_users' %}" class="{% if request.resolver_match.url_name == 'all_users' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Все пользователи</a></li>
-
+          {% endif %}
         </ul>
 
 

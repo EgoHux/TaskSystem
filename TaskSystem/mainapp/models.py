@@ -7,7 +7,7 @@ from edit_directory.models import TaskType, Status
 class Task(models.Model):
 
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="Автор", default=get_user_model(), related_name='authors')
-    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Исполнитель", default=None, related_name='executors')
+    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Исполнитель", default=None, related_name='executors', blank=True, null=True)
     description = models.TextField("Описание", max_length=250, default="")
     files = models.FileField(upload_to="files/", verbose_name="Файлы", blank=True, default=None)
     tasktype = models.ForeignKey(TaskType, on_delete=models.DO_NOTHING, verbose_name="Тип заявки", default=None)

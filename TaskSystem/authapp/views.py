@@ -6,6 +6,7 @@ from django.contrib import auth
 from authapp.forms import CustomUserLoginForm, CustomUserCreationForm, CustomUserChangeForm, UserDataForm
 from authapp.models import CustomUser, UserData
 from django.utils.timezone import now
+from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 
 
@@ -48,6 +49,8 @@ def register(request):
         'form': form
     })
 
+
+@login_required
 def account(request):
 
     try:
@@ -73,7 +76,7 @@ def account(request):
         'userdataform':userdataform
     })
 
-
+@user_passes_test(lambda u: u.is_superuser)
 def create_user(request):
     userform = CustomUserCreationForm()
     if request.method == 'POST':

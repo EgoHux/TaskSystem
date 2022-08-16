@@ -7,10 +7,11 @@ from .forms import TaskForm
 from authapp.models import CustomUser, UserData
 from authapp.forms import CustomUserChangeForm, UserDataForm
 from django.utils.timezone import now
+from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 
 
-
+@login_required
 def main(request):
     CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
     tasks = Task.objects.all()
@@ -21,22 +22,22 @@ def main(request):
         "comments": comments
     })
 
+@login_required
 def create_task(request):
-    error = ""
+    form = TaskForm()
     if request.method == "POST":
         form = TaskForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('main')
-        else:
-            error = "Ошибка заполнения задачи"
+            return HttpResponseRedirect(reverse('main'))
 
     return render(request, 'mainapp/create.html', context={
         'title':"Создать задачу",
-        'form': TaskForm(),
-        'error': error
+        'form': form
     })
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def all_users(request):
     users = CustomUser.objects.all()
 
@@ -50,6 +51,9 @@ def all_users(request):
 
     })
 
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def edit_user(request, user_id):
     user = CustomUser.objects.get(id=user_id)
 
@@ -79,6 +83,8 @@ def edit_user(request, user_id):
         'userdataform': userdataform
     })
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def delete_user(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     #userdata = get_object_or_404(UserData, user=user_id)

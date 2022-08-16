@@ -3,9 +3,12 @@ from django.urls import reverse
 from edit_directory.models import Status, TaskType
 from edit_directory.forms import StatusForm, TaskTypeForm
 from django.http.response import HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test
 
 
 # Create your views here.
+
+@user_passes_test(lambda u: u.is_superuser)
 def view(request):
     status = Status.objects.all()
     tasktype = TaskType.objects.all()
@@ -16,6 +19,8 @@ def view(request):
 
     })
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def create_status(request):
     form = StatusForm()
     if request.method == 'POST':
@@ -29,6 +34,7 @@ def create_status(request):
     })
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def edit_status(request, status_id):
     status=Status.objects.get(id=status_id)
     form = StatusForm(instance=status)
@@ -43,6 +49,7 @@ def edit_status(request, status_id):
     })
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def create_tasktype(request):
     form = TaskTypeForm()
     if request.method == 'POST':
@@ -55,6 +62,8 @@ def create_tasktype(request):
         'form':form
     })
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def edit_tasktype(request, tasktype_id):
     tasktype = TaskType.objects.get(id=tasktype_id)
     form = TaskTypeForm(instance=tasktype)
@@ -69,11 +78,15 @@ def edit_tasktype(request, tasktype_id):
     })
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def delete_status(request, pk):
     status = get_object_or_404(Status, pk=pk)
     status.delete()
     return HttpResponseRedirect(reverse("edit_directory:directory_view"))
 
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def delete_tasktype(request, pk):
     tasktype = get_object_or_404(TaskType, pk=pk)
     tasktype.delete()
