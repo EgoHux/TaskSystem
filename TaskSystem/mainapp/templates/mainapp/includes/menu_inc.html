@@ -23,8 +23,11 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#"><img src="{% static 'images/logo1.svg' %}" width="50" height="50"></a></li>
           <li><a href="{% url 'main' %}" class="{% if request.resolver_match.url_name == 'main' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}" >Главная</a></li>
-          <li><a href="{% url 'create' %}" class="{% if request.resolver_match.url_name == 'create' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Создать задачу</a></li>
           <li><a href="{% url 'mytasks:task_view' %}" class="{% if request.resolver_match.url_name == 'task_view' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Мои задачи</a></li>
+          {% if right.usertype_id.name == "Руководитель" or right.usertype_id.name == "Администратор" %}
+          <li><a href="{% url 'create' %}" class="{% if request.resolver_match.url_name == 'create' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Создать задачу</a></li>
+          <li><a href="{% url 'creation_tasks' %}" class="{% if request.resolver_match.url_name == 'creation_tasks' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Созданные задачи</a></li>
+          {% endif %}
           {% if request.user.is_superuser %}
           <li><a href="{% url 'edit_directory:directory_view' %}" class="{% if request.resolver_match.url_name == 'directory_view' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Редактирование справочников</a></li>
           <li><a href="{% url 'all_users' %}" class="{% if request.resolver_match.url_name == 'all_users' %} nav-link px-2 text-secondary {% else %} nav-link px-2 text-white {% endif %}">Все пользователи</a></li>
@@ -34,7 +37,7 @@
 
 
         <div class="text-end">
-          <a href="#" class="nav-link px-2 text-white">{{ user.username }}</a>
+          <a href="#" class="nav-link px-2 text-white">{{ user.username }} {% if right.usertype_id.name %}[{{right.usertype_id.name}}]{% else %} [Не определен] {% endif %}</a>
           <ul>
               <li><a href="{% url 'authapp:account' %}" class="nav-link px-2 text-white"> Аккаунт </a></li>
               <li><a href="{% url 'auth:logout' %}" class="nav-link px-2 text-white">> Выйти </a></li>

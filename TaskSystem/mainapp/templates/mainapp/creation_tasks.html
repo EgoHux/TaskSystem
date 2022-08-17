@@ -1,0 +1,30 @@
+{% load static %}
+{% include 'mainapp/includes/menu_inc.html' %}
+<h3>Созданные задачи:</h3>
+
+{% for task in tasks %}
+
+<div class="task_container">
+    
+  <h4>Задача № {{task.id}}</h4>
+  <p> Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p>Описание: </p>
+  <p>{{task.description}}</p>
+  <p>{{task.files}}</p>
+  <a class ='button' href="{% url 'edit_creation_tasks' task.pk %}">Редактирование</a>
+  <a class ='button' href="{% url 'creation_tasks_delete' task.pk %}">Снять задачу</a>
+  <hr>
+  <h4>Комментарии</h4>
+  {% for comment in comments %}
+
+  <p>{{comment}}</p>
+  {% endfor %}
+
+</div>
+{% endfor %}
+
+</body>
+
+
+
+</html>

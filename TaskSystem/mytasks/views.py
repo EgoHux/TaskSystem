@@ -20,9 +20,13 @@ def view(request):
 def add(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     mytask = MyTask.objects.filter(user=request.user, task=task)
-    task = get_object_or_404(Task, pk=task_id)
-    task.status.name = Status.objects.get(name="В разработке")
+    if task.executor == None:
+        task.executor = request.user
+    if task.status.name == "В ожидании":
+        task.status = Status.objects.get(id=2)
     task.save()
+    # task.status.name = Status.objects.get(name="В разработке")
+    # task.save()
     
     if mytask:
         mytask_item = mytask[0]

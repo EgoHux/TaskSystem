@@ -32,6 +32,9 @@ urlpatterns = [
     path('create', mainapp.create_task, name='create'),
     path("auth/", include('authapp.urls', namespace="auth")),
     path('tasks/', include('mytasks.urls', namespace='tasks')),
+    path('creation_tasks/', mainapp.creation_tasks, name="creation_tasks"),
+    path('creation_tasks/edit/<int:pk>', mainapp.edit_creation_tasks, name="edit_creation_tasks"),
+    path('creation_tasks/delete/<int:pk>', mainapp.creation_tasks_delete, name='creation_tasks_delete'),
     path('edit_directory/', include('edit_directory.urls', namespace='edit_directory')),
     path('delete/<int:user_id>', mainapp.delete_user, name='delete_user')
 

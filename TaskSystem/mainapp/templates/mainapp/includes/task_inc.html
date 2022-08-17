@@ -4,7 +4,7 @@
 
 <div class="task_container">
   <h4>Задача № {{task.id}}</h4>
-  <p> Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Отсутсвтует {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
   <p>Описание: </p>
   <p>{{task.description}}</p>
   <p>{{task.files}}</p>

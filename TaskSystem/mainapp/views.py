@@ -1,10 +1,11 @@
-from django.db.models import Model
+
+from turtle import right
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from .models import Task, Comment
 from .forms import TaskForm
-from authapp.models import CustomUser, UserData
+from authapp.models import CustomUser, UserData, Right
 from authapp.forms import CustomUserChangeForm, UserDataForm
 from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -16,18 +17,28 @@ def main(request):
     CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
     tasks = Task.objects.all()
     comments = Comment.objects.all()
+    try:
+        right = Right.objects.get(user_id=request.user)
+    except:
+        right = None
     return render(request, 'mainapp/main.html', context={
         "title": "Главное меню",
         "tasks": tasks,
-        "comments": comments
+        "comments": comments,
+        "right":right
     })
 
 @login_required
 def create_task(request):
+    user = CustomUser.objects.get(pk=request.user.pk)
     form = TaskForm()
+    # form.author = user
     if request.method == "POST":
         form = TaskForm(data=request.POST)
+        
         if form.is_valid():
+            form = form.save(commit=False)
+            form.author = user
             form.save()
             return HttpResponseRedirect(reverse('main'))
 
@@ -36,6 +47,34 @@ def create_task(request):
         'form': form
     })
 
+
+def creation_tasks(request):
+    task=Task.objects.filter(author=request.user)
+    return render(request, 'mainapp/creation_tasks.html', context={
+        'title':"Созданные задачи",
+        'tasks':task
+    })
+
+
+def edit_creation_tasks(request, pk):
+    task=get_object_or_404(Task, pk=pk)
+    form = TaskForm(instance=task)
+    if request.method == "POST":
+        form = TaskForm(data=request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("creation_tasks"))
+    return render(request, 'mainapp/edit_creation_tasks.html', context={
+        'title':"Созданные задачи",
+        'task':task,
+        'form':form
+    })
+
+
+def creation_tasks_delete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return HttpResponseRedirect(reverse('creation_tasks'))
 
 @user_passes_test(lambda u: u.is_superuser)
 def all_users(request):
