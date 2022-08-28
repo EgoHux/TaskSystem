@@ -3,18 +3,14 @@
 {% for task in tasks %}
 
 <div class="task_container">
-  <h4>Задача № {{task.id}}</h4>
+  <a href={%url 'task' task.id %}><h4>Задача № {{task.id}}</h4></a>
   <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Отсутсвтует {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
-  <p>Описание: </p>
-  <p>{{task.description}}</p>
+  <p>Заголовок: </p>
+  <p>{{task.title}}</p>
   <p>{{task.files}}</p>
-  <a href="{% url 'mytasks:add' task.id %}">Взять задачу</a>
+  
   <hr>
-  <h4>Комментарии</h4>
-  {% for comment in comments %}
-
-  <p>{{comment}}</p>
-  {% endfor %}
+  <a class="button" href="{% url 'mytasks:add' task.id %}">Взять задачу</a>
 
 </div>
 {% endfor %}

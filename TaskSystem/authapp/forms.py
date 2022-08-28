@@ -25,7 +25,7 @@ class CustomUserLoginForm(AuthenticationForm):
         def clean_is_active(self):
             data = self.cleaned_data["is_active"]
             if data == False:
-                return ValidationError("Пользователь не активирован!")
+                raise ValidationError("Пользователь не активирован!")
             return data
 
 

@@ -1,0 +1,33 @@
+{% load static %}
+{% include 'mainapp/includes/menu_inc.html' %}
+
+
+<div class="task_container">
+<h3> Задача № {{task.id}}</h3>
+  <p> Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p>{{task.title}}</p>
+  <hr>
+  <p>Описание: </p>
+  <p>{{task.description}}</p>
+  <p>{{task.files}}</p>
+<hr><h4>Комментарии</h4>
+{% for comment in comments %}
+
+<p>{{comment}}</p>
+{% endfor %}
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+<br>
+  <input class="button" type="submit" value="Отправить">
+</form>
+ 
+</div>
+
+
+</body>
+
+
+
+</html>

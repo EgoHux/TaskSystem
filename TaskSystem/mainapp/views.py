@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from .models import Task, Comment
-from .forms import TaskForm
+from .forms import TaskForm, CommentForm
 from authapp.models import CustomUser, UserData, Right
 from authapp.forms import CustomUserChangeForm, UserDataForm
 from django.utils.timezone import now
@@ -16,7 +16,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 def main(request):
     CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
     tasks = Task.objects.all()
-    comments = Comment.objects.all()
     try:
         right = Right.objects.get(user_id=request.user)
     except:
@@ -24,8 +23,29 @@ def main(request):
     return render(request, 'mainapp/main.html', context={
         "title": "Главное меню",
         "tasks": tasks,
-        "comments": comments,
         "right":right
+    })
+
+
+@login_required
+def task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    comment = Comment.objects.filter(task=task)
+    form = CommentForm()
+    if request.method =="POST":
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.data = now
+            form.author = request.user
+            form.task = task
+            form.save()
+            return HttpResponseRedirect(reverse('task', args=[pk]))
+    return render(request, 'mainapp/task.html', context={
+        "title": f"Задача №{task.id}",
+        'task':task,
+        'comments':comment,
+        'form':form
     })
 
 @login_required
@@ -47,7 +67,7 @@ def create_task(request):
         'form': form
     })
 
-
+@login_required
 def creation_tasks(request):
     task=Task.objects.filter(author=request.user)
     return render(request, 'mainapp/creation_tasks.html', context={
@@ -55,7 +75,7 @@ def creation_tasks(request):
         'tasks':task
     })
 
-
+@login_required
 def edit_creation_tasks(request, pk):
     task=get_object_or_404(Task, pk=pk)
     form = TaskForm(instance=task)
@@ -70,7 +90,7 @@ def edit_creation_tasks(request, pk):
         'form':form
     })
 
-
+@login_required
 def creation_tasks_delete(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.delete()
@@ -118,6 +138,7 @@ def edit_user(request, user_id):
 
     return render(request, 'mainapp/edit_user.html', context={
         'title':'Изменить пользователя',
+        'user':user,
         'userform':userform,
         'userdataform': userdataform
     })

@@ -49,11 +49,10 @@
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
-					{% if not request.user.is_active %}
-					<p class="user-activate"> Пользователь не активирован!  </p>
-					{% else %}
-					<p>Пользователь активирован</p>
-					{% endif %}
+					
+					<p class="user-activate">{% if request.user.is_active == False %} Пользователь не активирован! {% endif %} </p>
+
+					
 					<a href="{% url 'auth:register' %}">Нет аккаунта? Зарегестрироваться</a>
 					<div class="container-login100-form-btn m-t-32">
 						<input class="login100-form-btn" type="submit" value="Войти"/>

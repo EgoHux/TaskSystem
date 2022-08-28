@@ -21,6 +21,7 @@ def login(request):
                 password = form.cleaned_data["password"],
                 LastAuthDate = now()
             )
+        
             if user:
                 auth.login(request, user=user)
                 return HttpResponseRedirect(reverse('main'))

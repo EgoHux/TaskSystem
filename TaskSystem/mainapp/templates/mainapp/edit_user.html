@@ -5,7 +5,13 @@
 <h2>Пользователь</h2>
 <form method="post" class="third maindiv">
     {% csrf_token %}
-    {{userform.as_p}}
+    <span>{{userform.username}}</span>
+    
+    <label>
+        <input type="checkbox" {% if user.is_active == True%} checked {% endif%} name={{userform.is_active.name}} >
+        <span class="checkable" >Пользователь активирован</span>
+      </label>
+    
 
 <h2>Профиль</h2>
     {{userdataform.as_p}}

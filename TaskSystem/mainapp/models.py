@@ -8,6 +8,7 @@ class Task(models.Model):
 
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="Автор", default=get_user_model(), related_name='authors', blank=True)
     executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Исполнитель", default=None, related_name='executors', blank=True, null=True)
+    title = models.CharField("Заголовок", max_length=100, default=None)
     description = models.TextField("Описание", max_length=250, default="")
     files = models.FileField(upload_to="files/", verbose_name="Файлы", blank=True, default=None)
     tasktype = models.ForeignKey(TaskType, on_delete=models.DO_NOTHING, verbose_name="Тип заявки", default=None)
@@ -27,7 +28,7 @@ class HistoryTask(models.Model):
 
 
 class Comment(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.DO_NOTHING, verbose_name="Задача", default=None, related_name='сomments')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, verbose_name="Задача", default=None, related_name='сomments')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="Автор", default=None)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField(verbose_name="Текст", max_length=100)
