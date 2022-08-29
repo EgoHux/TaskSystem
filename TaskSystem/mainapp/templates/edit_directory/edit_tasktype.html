@@ -1,7 +1,12 @@
-<form method="post">
+{% load static %}
+{% include 'mainapp/includes/menu_inc.html' %}
+
+<div class='page_style'>
+<form method="post" class='third'>
+
     {% csrf_token %}
    {{form.as_p}}
     <input type="submit" value="Сохранить изменения">
 
 </form>
-
+</div>

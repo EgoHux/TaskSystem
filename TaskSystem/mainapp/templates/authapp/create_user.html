@@ -2,10 +2,11 @@
 
 {% include 'mainapp/includes/menu_inc.html' %}
 
-
+<div class='page_style_account'>
 <form method="post">
   {% csrf_token %}
   <h3>Создание пользователя</h3>
   {{userform.as_p}}
   <input type="submit" value="Создать пользователя">
 </form>
+</div>

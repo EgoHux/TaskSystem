@@ -1,5 +1,8 @@
 {% load static %}
 {% include 'mainapp/includes/menu_inc.html' %}
+
+
+<div class='page_style'>
 <h3>Все пользователи</h3>
 <hr>
 <a class="button" href ="{% url 'auth:create_user' %}" >Создать пользователя </a>
@@ -55,4 +58,4 @@
       {% endfor %}
     </tbody>
   </table>
-
+</div>
