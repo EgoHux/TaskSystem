@@ -5,13 +5,19 @@ from .models import MyTask
 from mainapp.models import Task, Comment
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
+from authapp.models import Right
 # Create your views here.
 
 @login_required
 def view(request):
+    try:
+        right = Right.objects.get(user_id=request.user)
+    except:
+        right = None
     return render(request, 'mytasks/base.html', context={
         'title':"Мои задачи",
         'mytasks': MyTask.objects.filter(user=request.user),
+        "right":right,
         "comments": Comment.objects.all()
 
     })
@@ -42,4 +48,12 @@ def add(request, task_id):
 def delete(request, mytask_id):
     mytask = get_object_or_404(MyTask, pk=mytask_id)
     mytask.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def complete(request, mytask_id):
+    mytask = get_object_or_404(MyTask, pk=mytask_id)
+    task = get_object_or_404(Task, pk=mytask.task.id)
+    task.status = Status.objects.get(id=3)
+    task.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

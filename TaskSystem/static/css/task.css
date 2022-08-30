@@ -2,11 +2,18 @@
     background-color: #FFE4B5;
     margin: 50px 500px 50px 50px;
     padding: 15px 15px 15px 15px;
-    }
+}
 
 
 .main_page {
     background-color: #FFE4B5;
     margin: 50px 500px 50px 50px;
     padding: 15px 15px 15px 15px;
- }
+}
+
+.comment_style {
+    background-color: rgb(191, 201, 199);
+    border-radius: 1%;
+    border-width: 100px;
+    
+}

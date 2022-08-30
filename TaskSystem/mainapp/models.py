@@ -31,7 +31,7 @@ class Comment(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, verbose_name="Задача", default=None, related_name='сomments')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="Автор", default=None)
     date = models.DateTimeField(auto_now_add=True)
-    text = models.TextField(verbose_name="Текст", max_length=100)
+    text = models.TextField(verbose_name="Текст", max_length=100, blank=True)
     files = models.FileField(upload_to="comment_files/", verbose_name="Прикрепленные файлы", blank=True, default=None)
 
     def __str__(self):

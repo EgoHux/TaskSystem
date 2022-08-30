@@ -1,6 +1,8 @@
 from dataclasses import fields
 from django import forms
 
+from authapp.models import Right
+
 from .models import Task, Comment
 
 
@@ -22,6 +24,19 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ("text", "files")
                     
+
+class RightForm(forms.ModelForm):
+    class Meta:
+        model = Right
+        fields = ('user_id', 'usertype_id')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name == "user_id":
+                field.widget = forms.HiddenInput()
+
+
 
 
 

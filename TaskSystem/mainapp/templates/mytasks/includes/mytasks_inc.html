@@ -9,7 +9,8 @@
   <p>{{mytask.task.description}}</p>
   <p>{{mytask.task.files}}</p>
 
-  <a href="{% url 'mytasks:delete' mytask.id %}">Убрать задачу</a>
+  <a class="button" href="{% url 'mytasks:delete' mytask.id %}">Убрать задачу</a>
+  <a class="button" href="{% url 'mytasks:complete' mytask.id %}">Задача выполнена</a>
 
 </div>
 {% endfor %}

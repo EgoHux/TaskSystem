@@ -14,7 +14,8 @@
       <tr>
         <th>Username</th>
         <th>Последний вход</th>
-        <th>Активность<th>        
+        <th>Активность<th>       
+        <th>Тип пользователя</th> 
         <th><th>
         <th><th>
       </tr>
@@ -25,7 +26,8 @@
         <td>{{user.username}}</td>
         <td>{{user.last_login}}</td>
         <td>{{user.is_active}}</td>
-        <td>{{user.type}}</td>
+        <td>{% if user.right__usertype_id__name %}{{user.right__usertype_id__name}} {% else %} Не определен {%endif%}</td>
+        
         <td><a href ="{% url 'edit_user' user.id %}">Изменить  </a></td>
         <td><a href ="{% url 'delete_user' user.id %}">Удалить </a></td>
       </tr>

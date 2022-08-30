@@ -37,9 +37,10 @@ urlpatterns = [
     path('creation_tasks/edit/<int:pk>', mainapp.edit_creation_tasks, name="edit_creation_tasks"),
     path('creation_tasks/delete/<int:pk>', mainapp.creation_tasks_delete, name='creation_tasks_delete'),
     path('edit_directory/', include('edit_directory.urls', namespace='edit_directory')),
-    path('delete/<int:user_id>', mainapp.delete_user, name='delete_user')
+    path('delete/<int:user_id>', mainapp.delete_user, name='delete_user'),
+    
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 if settings.DEBUG:

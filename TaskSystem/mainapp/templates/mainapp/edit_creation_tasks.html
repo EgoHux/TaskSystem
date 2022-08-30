@@ -6,7 +6,7 @@
 <h3>Изменение задачи №{{task.id}}:</h3>
 
 
-<form action="{% url 'edit_creation_tasks' task.pk %}" method="post">
+<form action="{% url 'edit_creation_tasks' task.pk %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
 

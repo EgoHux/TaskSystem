@@ -4,9 +4,10 @@ from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import auth
 from authapp.forms import CustomUserLoginForm, CustomUserCreationForm, CustomUserChangeForm, UserDataForm
-from authapp.models import CustomUser, UserData
+from authapp.models import CustomUser, UserData, Right
 from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required, user_passes_test
+
 # Create your views here.
 
 
@@ -53,6 +54,10 @@ def register(request):
 
 @login_required
 def account(request):
+    try:
+        right = Right.objects.get(user_id=request.user)
+    except:
+        right = None
 
     try:
         userdata = UserData.objects.get(user=request.user)
@@ -73,12 +78,17 @@ def account(request):
 
     return render(request, 'authapp/account.html', context={
         'title': "Мой аккаунт",
+        "right":right,
         'userform': userform,
         'userdataform':userdataform
     })
 
 @user_passes_test(lambda u: u.is_superuser)
 def create_user(request):
+    try:
+        right = Right.objects.get(user_id=request.user)
+    except:
+        right = None
     userform = CustomUserCreationForm()
     if request.method == 'POST':
         userform = CustomUserCreationForm(data=request.POST)
@@ -89,5 +99,6 @@ def create_user(request):
 
     return render(request, 'authapp/create_user.html', context={
         'title': 'Создание аккаунта',
+        "right":right,
         'userform': userform
     })

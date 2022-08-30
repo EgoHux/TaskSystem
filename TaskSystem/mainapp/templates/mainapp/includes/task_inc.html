@@ -7,10 +7,11 @@
   <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Отсутсвтует {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
   <p>Заголовок: </p>
   <p>{{task.title}}</p>
-  <p>{{task.files}}</p>
+  
   
   <hr>
+  {%if not task.executor %}
   <a class="button" href="{% url 'mytasks:add' task.id %}">Взять задачу</a>
-
+  {%endif%}
 </div>
 {% endfor %}

@@ -17,7 +17,7 @@ class CustomUser(AbstractUser):
 
 class Right(models.Model):
     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь")
-    usertype_id = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name="Тип пользователя")
+    usertype_id = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name="Тип пользователя", null=True)
 
     def __str__(self):
         return f"{self.user_id} - {self.usertype_id}"
