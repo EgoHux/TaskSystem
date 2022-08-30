@@ -1,0 +1,56 @@
+{% load static %}
+
+{% include 'mainapp/includes/menu_inc.html' %}
+
+<div class='page_style'>
+<h3>Редактирование Стастусов</h3>
+<a class="button" href="{% url 'edit_directory:create_status' %}">Создать статус</a>
+<table class="primary">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Цвет</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for status in statuses %}
+      <tr>
+        <td>{{status.name}}</td>
+        <td>{{status.get_color_status_display}}</td>
+        <td><a href="{% url 'edit_directory:edit_status' status.id %}">Изменить</a></td>
+        <td><a href="{% url 'edit_directory:delete_status' status.id %}">Удалить</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<hr>
+
+<h3>Редактирование Типов заявки</h3>
+<a class="button" href="{% url 'edit_directory:create_tasktype' %}">Создать тип заявки</a>
+
+<table class="primary">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for tasktype in tasktypes %}
+      <tr>
+        <td>{{tasktype.name}}</td>
+        <td><a href="{% url 'edit_directory:edit_tasktype' tasktype.id %}">Изменить</a></td>
+        <td><a href="{% url 'edit_directory:delete_tasktype' tasktype.id %}">Удалить</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<hr>
+</div>
+
+

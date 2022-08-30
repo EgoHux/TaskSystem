@@ -1,0 +1,16 @@
+{% load static %}
+
+{% for mytask in mytasks %}
+
+<div class="task_container">
+  <a href={%url 'task' mytask.task.id %}><h4>Задача № {{mytask.task.id}}</h4></a>
+  <p> Заказчик: {{mytask.task.author}} | Исполнитель: {{mytask.task.executor}} | Статус: {{ mytask.task.status }} | Тип: {{ mytask.task.tasktype }}</p>
+  <p>Описание: </p>
+  <p>{{mytask.task.description}}</p>
+  <p>{{mytask.task.files}}</p>
+
+  <a class="button" href="{% url 'mytasks:delete' mytask.id %}">Убрать задачу</a>
+  <a class="button" href="{% url 'mytasks:complete' mytask.id %}">Задача выполнена</a>
+
+</div>
+{% endfor %}

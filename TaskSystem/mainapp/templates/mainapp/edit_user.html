@@ -1,0 +1,21 @@
+{% load static %}
+{% include 'mainapp/includes/menu_inc.html' %}
+
+<div class='page_style'>
+<h2>Пользователь</h2>
+<form method="post" class="third maindiv">
+    {% csrf_token %}
+    <span>{{userform.username}}</span>
+    
+    <label>
+        <input type="checkbox" {% if user.is_active == True%} checked {% endif%} name={{userform.is_active.name}} >
+        <span class="checkable" >Пользователь активирован</span>
+      </label>
+    
+    {{rightform.as_p}}
+
+<h2>Профиль</h2>
+    {{userdataform.as_p}}
+    <input type="submit" value="Сохранить изменения">
+    </div>
+</form>

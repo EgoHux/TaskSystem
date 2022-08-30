@@ -1,0 +1,45 @@
+{% include 'mainapp/includes/menu_inc.html' %}
+{% load static %}
+
+
+
+<div class="task_container">
+<h3> Задача № {{task.id}}</h3>
+  <p> Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p>{{task.title}}</p>
+  <hr>
+  <p>Описание: </p>
+  <p>{{task.description}}</p>
+  <p><a href='{{ settings.MEDIA_URL }}{{task.files.url}}' download><img style="width: 50px" src ="{%static 'images/icons/doc-icon.png'%}"> {{task.files.name}} </a></p>
+<hr><h4>Оставить комментарий</h4>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+<br>
+  <input class="button" type="submit" value="Отправить">
+</form>
+<br>
+<h3>Комментарии</h3>
+
+{% for comment in comments %}
+
+<div class="card">
+  <p>{{comment}}</p>
+  {%if comment.files%}
+  <p><a href='{{ settings.MEDIA_URL }}{{comment.files.url}}' download> <img style="width: 30px" src ="{%static 'images/icons/doc-icon.png'%}"> {{comment.files.name}}</a></p>
+  {%endif%}
+</div>
+  <hr>
+  {% endfor %}
+
+
+ 
+</div>
+
+
+</body>
+
+
+
+</html>

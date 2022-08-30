@@ -1,0 +1,63 @@
+{% load static %}
+{% include 'mainapp/includes/menu_inc.html' %}
+
+
+<div class='page_style'>
+<h3>Все пользователи</h3>
+<hr>
+<a class="button" href ="{% url 'auth:create_user' %}" >Создать пользователя </a>
+<hr>
+
+
+<table class="primary">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Последний вход</th>
+        <th>Активность<th>       
+        <th>Тип пользователя</th> 
+        <th><th>
+        <th><th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+      <tr>
+        <td>{{user.username}}</td>
+        <td>{{user.last_login}}</td>
+        <td>{{user.is_active}}</td>
+        <td>{% if user.right__usertype_id__name %}{{user.right__usertype_id__name}} {% else %} Не определен {%endif%}</td>
+        
+        <td><a href ="{% url 'edit_user' user.id %}">Изменить  </a></td>
+        <td><a href ="{% url 'delete_user' user.id %}">Удалить </a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<h3>Требуют активации</h3>
+<table class="primary">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Последний вход</th>
+        <th>Активность<th>        
+        <th><th>
+        <th><th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in non_active_user %}
+      <tr>
+        <td>{{user.username}}</td>
+        <td>{{user.last_login}}</td>
+        <td>{{user.is_active}}</td>
+        <td>{{user.type}}</td>
+        <td><a href ="{% url 'edit_user' user.id %}">Изменить  </a></td>
+        <td><a href ="{% url 'delete_user' user.id %}">Удалить </a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

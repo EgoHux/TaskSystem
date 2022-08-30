@@ -1,0 +1,17 @@
+{% load static %}
+
+{% for task in tasks %}
+
+<div class="task_container">
+  <a href={%url 'task' task.id %}><h4>Задача № {{task.id}}</h4></a>
+  <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Отсутсвтует {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p>Заголовок: </p>
+  <p>{{task.title}}</p>
+  
+  
+  <hr>
+  {%if not task.executor %}
+  <a class="button" href="{% url 'mytasks:add' task.id %}">Взять задачу</a>
+  {%endif%}
+</div>
+{% endfor %}

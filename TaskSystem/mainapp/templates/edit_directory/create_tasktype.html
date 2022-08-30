@@ -1,0 +1,20 @@
+{% load static %}
+
+{% include 'mainapp/includes/menu_inc.html' %}
+
+<div class='page_style'>
+<h3>Создать тип заявки:</h3>
+
+
+<form class="third" action="{% url 'edit_directory:create_tasktype' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+<br>
+    <input class="button" type="submit" value="Создать тип заявки">
+</form>
+</div>
+</div>
+
+</body>
+</html>
