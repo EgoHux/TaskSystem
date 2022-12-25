@@ -1,6 +1,4 @@
 
-from cmath import pi
-from turtle import right
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
