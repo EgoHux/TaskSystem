@@ -57,7 +57,7 @@ def edit_status(request, status_id):
         form = StatusForm(data=request.POST, instance=status)
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('view'))
+        return HttpResponseRedirect(reverse('edit_directory:directory_view'))
 
     return render(request, 'edit_directory/edit_status.html', context={
         "right":right,
@@ -96,7 +96,7 @@ def edit_tasktype(request, tasktype_id):
         form = TaskTypeForm(data=request.POST, instance=tasktype)
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('view'))
+        return HttpResponseRedirect(reverse('edit_directory:directory_view'))
 
     return render(request, 'edit_directory/edit_tasktype.html', context={
         'form': form,
