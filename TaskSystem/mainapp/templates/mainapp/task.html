@@ -10,9 +10,9 @@
   <hr>
   <p>Описание: </p>
   <p>{{task.description}}</p>
-  {% if task.files %}
+  {% if task.files%}
   <p><a href='{{ settings.MEDIA_URL }}{{task.files.url}}' download><img style="width: 50px" src ="{%static 'images/icons/doc-icon.png'%}"> {{task.files.name}} </a></p>
-  {% endif %}
+  {%endif%}
 <hr><h4>Оставить комментарий</h4>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}

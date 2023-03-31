@@ -5,8 +5,8 @@
 <div class="task_container">
   <a href={%url 'task' task.id %}><h4>Задача № {{task.id}}</h4></a>
   <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Отсутсвтует {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
-  <p>Заголовок: </p>
-  <p>{{task.title}}</p>
+  <p>Заголовок: {{task.title}} </p>
+  
   
   
   <hr>

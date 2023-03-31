@@ -1,0 +1,100 @@
+.scrum-board {
+    display: flex;
+    justify-content: space-between;
+}
+
+.scrum-column {
+    width: 30%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.scrum-column h2 {
+    text-align: center;
+}
+
+.scrum-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scrum-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.task_item {
+    position: relative;
+    padding-left: 20px;
+}
+
+.task_item::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border: 50%;
+    width: 7px;
+    height: 100%;
+
+}
+
+.done_list::before {
+    background-color: greenyellow;
+
+}
+
+.todo-list::before {
+    background-color: grey;
+}
+
+.in-progress-list::before {
+    background-color: yellow;
+}
+
+.rework-list::before {
+    background-color: red;
+}
+
+.done_list:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.done_list:hover::before {
+    opacity: 0.8;
+}
+
+.rework-list:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.rework-list:hover::before {
+    opacity: 0.8;
+}
+
+.in-progress-list:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+}
+
+.in-progress-list:hover::before {
+    opacity: 0.8;
+}
+
+.todo-list:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.todo-list:hover::before {
+    opacity: 0.8;
+}

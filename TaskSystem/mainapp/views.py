@@ -1,8 +1,11 @@
 
+from cmath import pi
+from turtle import right
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from .models import Task, Comment
+from edit_directory.models import Status
 from .forms import RightForm, TaskForm, CommentForm
 from authapp.models import CustomUser, UserData, Right
 from authapp.forms import CustomUserChangeForm, UserDataForm
@@ -24,6 +27,28 @@ def main(request):
         "title": "Главное меню",
         "tasks": tasks,
         "right":right
+    })
+
+@login_required
+def test_main(request):
+    CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
+    tasks = Task.objects.all()
+    todo = Task.objects.filter(status=1)
+    in_progress = Task.objects.filter(status=2)
+    done = Task.objects.filter(status=3)
+    rework = Task.objects.filter(status=4)
+    try:
+        right = Right.objects.get(user_id=request.user)
+    except:
+        right = None
+    return render(request, 'mainapp/test_main.html', context={
+        "title": "Главное меню",
+        "tasks": tasks,
+        "right":right,
+        "todo": todo,
+        "in_progress": in_progress,
+        "done": done, 
+        "rework":rework
     })
 
 

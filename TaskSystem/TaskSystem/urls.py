@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', authapp.login, name="login"),
     path('main', mainapp.main, name ='main'),
+    path('test_main', mainapp.test_main, name='test_main'),
     path('all_users', mainapp.all_users, name="all_users"),
     path('all_users/edit_user/<int:user_id>/', mainapp.edit_user, name='edit_user'),
     path('create', mainapp.create_task, name='create'),
