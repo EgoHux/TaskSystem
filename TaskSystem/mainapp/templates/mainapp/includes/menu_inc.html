@@ -24,17 +24,17 @@
     <nav class='menu-items'>
       <ul class='menu-item'>
         
-        <li><a href="{% url 'test_main' %}" >SCRUM </a></li>
-        <li><a href="{% url 'mytasks:task_view' %}">Мои задачи</a></li>
+        <li><a href="{% url 'test_main' %}" class="{% if request.resolver_match.url_name == 'test_main' %} active_url {% endif %}">SCRUM</a></li>
+        <li><a href="{% url 'mytasks:task_view' %}" class="{% if request.resolver_match.url_name == 'task_view' %} active_url  {% endif %}">Мои задачи</a></li>
         {% if right.usertype_id.name == "Руководитель" or right.usertype_id.name == "Администратор" %}
-        <li><a href="{% url 'create' %}">Создать задачу</a></li>
-        <li><a href="{% url 'creation_tasks' %}">Созданные задачи</a></li>
+        <li><a href="{% url 'create' %}" class="{% if request.resolver_match.url_name == 'create' %} active_url{% endif %}">Создать задачу</a></li>
+        <li><a href="{% url 'creation_tasks' %}" class="{% if request.resolver_match.url_name == 'creation_tasks' %} active_url {% endif %}">Созданные задачи</a></li>
         {% endif %}
         {% if request.user.is_superuser %}
-        <li><a href="{% url 'edit_directory:directory_view' %}" >Редактирование справочников</a></li>
+        <li><a href="{% url 'edit_directory:directory_view' %} " class="{% if request.resolver_match.url_name == 'directory_view' %} active_url {% endif %}">Редактирование справочников</a></li>
         <li><a href="{% url 'all_users' %}" >Все пользователи</a></li>
         {% endif %}
-        <li><a href="#">{{ user.username }} {% if right.usertype_id.name %}[{{right.usertype_id.name}}]{% else %} [Не определен] {% endif %}</a>
+        <li><a href="#" class="{% if request.resolver_match.url_name == 'account' %} active_url {% endif %}">{{ user.username }} {% if right.usertype_id.name %}[{{right.usertype_id.name}}]{% else %} [Не определен] {% endif %}</a>
         <ul>
           <li><a href="{% url 'authapp:account' %}"> Аккаунт </a></li>
           <li><a href="{% url 'auth:logout' %}" > Выйти </a></li>

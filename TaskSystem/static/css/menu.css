@@ -97,6 +97,12 @@ header nav ul li a {
 
 }
 
+.active_url {
+    border-radius: 50px;
+    background-color: #000;
+    color: #fff;
+}
+
 header nav ul li a:hover {
     border-radius: 50px;
     background-color: #000;
