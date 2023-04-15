@@ -1,7 +1,10 @@
 .task_container {
-    background-color: #FFE4B5;
+    background-color: #e8e8e8;
     margin: 50px 500px 50px 50px;
     padding: 15px 15px 15px 15px;
+    border-radius: 30px;
+    border-width: 100px;
+    border: 3px solid black;
 }
 
 
@@ -15,5 +18,5 @@
     background-color: rgb(191, 201, 199);
     border-radius: 1%;
     border-width: 100px;
-    
+
 }

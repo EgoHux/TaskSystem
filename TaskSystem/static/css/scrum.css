@@ -7,11 +7,14 @@
     width: 30%;
     padding: 10px;
     background-color: #f0f0f0;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .scrum-column h2 {
     text-align: center;
+
 }
 
 .scrum-list {
@@ -23,8 +26,10 @@
 .scrum-list li {
     margin: 10px 0;
     padding: 10px;
+    padding-left: 20px;
     background-color: #fff;
     border-radius: 5px;
+    border: 1px solid gainsboro;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
