@@ -4,46 +4,60 @@
 <br>
 <div class='page_style'>
     {% block content %}
-    <div class="scrum-board">
-      <div class="scrum-column">
+    <div class="scrum-board" droppable='true'>
+      <div class="scrum-column" droppable='true'>
         <h2>В ожидании</h2>
-        <ul class="scrum-list" id="todo-list">
+        <ul class="scrum-list" id="todo-list" >
           {% for item in todo %}
-          <li class='task_item todo-list' draggable="true"> <a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}
+          <li class='task_item todo-list' draggable="true"> {{item.tasktype}}
+            <p><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}</p>
             <p>Автор: {{item.author}}</p>
+            <p>Исполнитель: {{item.executor}}</p>
           </li>
           {% endfor %}
         </ul>
       </div>
-      <div class="scrum-column" >
+      <div class="scrum-column" droppable='true' >
         <h2>В работе</h2>
-        <ul class="scrum-list" id="in-progress-list" >
+        <ul class="scrum-list" id="in-progress-list">
           {% for item in in_progress %}
-          <li class='task_item in-progress-list' draggable="true"><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}
-            <p>Автор: {{item.author}}</p></li>
+          <li class='task_item in-progress-list' draggable="true">{{item.tasktype}}
+            <p><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}</p>
+            <p>Автор: {{item.author}}</p>
+            <p>Исполнитель: {{item.executor}}</p>
+          </li>
           {% endfor %}
         </ul>
       </div>
-      <div class="scrum-column">
+      <div class="scrum-column" droppable='true' >
         <h2>Выполнены</h2>
-        <ul class="scrum-list " id="done-list">
+        <ul class="scrum-list " id="done-list" >
           {% for item in done %}
-          <li class='task_item done_list' draggable="true"><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}
-            <p>Автор: {{item.author}}</p></li>
+          <li class='task_item done_list' draggable="true">{{item.tasktype}}
+            <p><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}</p>
+            <p>Автор: {{item.author}}</p>
+            <p>Исполнитель: {{item.executor}}</p>
+          </li>
           {% endfor %}
         </ul>
       </div>
-      <div class="scrum-column">
+      <div class="scrum-column" droppable='true'>
         <h2>Доработка</h2>
-        <ul class="scrum-list" id="rework-list">
+        <ul class="scrum-list" id="rework-list" >
           {% for item in rework %}
-          <li class='task_item rework-list' draggable="true"><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}
-            <p>Автор: {{item.author}}</p></li>
+          <li class='task_item rework-list' draggable="true">{{item.tasktype}}
+            <p><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}</p>
+            <p>Автор: {{item.author}}</p>
+            <p>Исполнитель: {{item.executor}}</p>
+          </li>
+            
           {% endfor %}
         </ul>
       </div>
     </div>
     {% endblock %}
+
 </div>
+<script type="text/javascript" src="{% static 'js/scrum.js' %}"></script>  
 </body>
 </html>

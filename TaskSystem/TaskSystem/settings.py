@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'mytasks',
-    'edit_directory'
+    'edit_directory',
+    'colorfield'
 ]
 
 MIDDLEWARE = [

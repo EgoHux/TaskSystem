@@ -11,6 +11,8 @@ from authapp.models import CustomUser, UserData, Right
 from authapp.forms import CustomUserChangeForm, UserDataForm
 from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import pickle
 # Create your views here.
 
@@ -19,6 +21,11 @@ import pickle
 def main(request):
     CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
     tasks = Task.objects.all()
+    statuses = Status.objects.all()
+    todo = Task.objects.filter(status=1)
+    in_progress = Task.objects.filter(status=2)
+    done = Task.objects.filter(status=3)
+    rework = Task.objects.filter(status=4)
     try:
         right = Right.objects.get(user_id=request.user)
     except:
@@ -26,13 +33,19 @@ def main(request):
     return render(request, 'mainapp/main.html', context={
         "title": "Главное меню",
         "tasks": tasks,
-        "right":right
+        "right":right,
+        "todo": todo,
+        "in_progress": in_progress,
+        "done": done, 
+        "rework":rework,
+        "statuses": statuses
     })
 
 @login_required
 def test_main(request):
     CustomUser.objects.filter(pk=request.user.pk).update(LastAuthDate=now())
     tasks = Task.objects.all()
+    statuses = Status.objects.all()
     todo = Task.objects.filter(status=1)
     in_progress = Task.objects.filter(status=2)
     done = Task.objects.filter(status=3)
@@ -48,9 +61,21 @@ def test_main(request):
         "todo": todo,
         "in_progress": in_progress,
         "done": done, 
-        "rework":rework
+        "rework":rework,
+        "statuses": statuses
     })
 
+@csrf_exempt
+def update_task_status(request):
+    if request.method == "POST":
+        task_id = request.POST.get("task_id")
+        new_status = request.POST.get("new_status")
+
+        task = Task.objects.get(id=task_id)
+        task.status = new_status
+        task.save()
+
+        return JsonResponse({"status": "success"})
 
 @login_required
 def task(request, pk):

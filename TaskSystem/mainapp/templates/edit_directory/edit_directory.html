@@ -18,7 +18,7 @@
         {% for status in statuses %}
       <tr>
         <td>{{status.name}}</td>
-        <td>{{status.get_color_status_display}}</td>
+        <td><p class='color-block' style="background-color: {{status.color_status}};"></p></td>
         <td><a href="{% url 'edit_directory:edit_status' status.id %}">Изменить</a></td>
         <td><a href="{% url 'edit_directory:delete_status' status.id %}">Удалить</a></td>
       </tr>
