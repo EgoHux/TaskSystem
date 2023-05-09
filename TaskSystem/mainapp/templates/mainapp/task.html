@@ -3,7 +3,7 @@
 
 
 
-<div class="task_container">
+<div class="task_container_check" style="--status-color: {{task.status.color_status}};">
 <h3> Задача № {{task.id}}</h3>
   <p> Заказчик: {{task.author}} | Исполнитель: {{task.executor}} | Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
   <p>{{task.title}}</p>
@@ -35,13 +35,6 @@
   <hr>
   {% endfor %}
 
-
- 
 </div>
-
-
 </body>
-
-
-
 </html>

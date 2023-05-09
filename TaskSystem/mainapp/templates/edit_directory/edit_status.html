@@ -2,10 +2,12 @@
 {% include 'mainapp/includes/menu_inc.html' %}
 
 <div class='page_style'>
+    <div class='main_page'>
 <form method="post" class='third'>
     {% csrf_token %}
    {{form.as_p}}
     <input type="submit" value="Сохранить изменения">
 
 </form>
+</div>
 </div>

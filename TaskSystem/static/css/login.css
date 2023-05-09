@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Popins', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #03a9f4;
+    transition: 0.5s;
+}
+
+body.active {
+    background-color: #f43648;
+}
+
+.container {
+    width: 800px;
+    height: 500px;
+    padding: 40px 0;
+    position: relative;
+}
+
+.block {
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    align-items: center;
+}
+
+.block-item {
+    text-align: center;
+}
+
+.block__item {
+    width: 50%;
+}
+
+.block-item__title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 10px;
+
+}
+
+.block-item__btn {
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.form-box {
+    background-color: #fff;
+    height: 100%;
+    width: 50%;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: 0.5s ease-in-out;
+
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.form-box.active {
+    left: 50%;
+}
+
+
+.form {
+    width: 100%;
+    padding: 50px;
+    font-size: 16px;
+    position: absolute;
+    transition: 0.5s;
+}
+
+.form_signin {
+    left: 0;
+    transition-delay: 0.25s;
+}
+
+.form_signup {
+    left: 100%;
+    transition-delay: 0s
+}
+
+
+.form-box.active .form_signin {
+    left: -100%;
+    transition-delay: 0s;
+
+
+}
+
+.form-box.active .form_signup {
+    left: 0;
+    transition-delay: 0.25s;
+}
+
+.form__title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form__input {
+    width: 100%;
+    padding: 10px;
+    border: solid 1px #333;
+    font-size: inherit;
+}
+
+.form__btn {
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    background-color: #03a9f4;
+    color: #fff;
+    padding: 10px 50px;
+}
+
+.form_forgot {
+    color: #333;
+}
+
+.form__btn_signup {
+
+    background-color: #f43648;
+
+}
+
+.main_logo {
+    width: 500px;
+    height: 500px;
+}
+
+.messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.messages li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.messages li.success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+
+.messages li.error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+
+@media (max-width: 992px) {
+    .container {
+        min-width: 400px;
+        height: 650px;
+        padding: 0;
+        margin: 0 20px;
+    }
+
+    .block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+    .block-item {
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    .form-box {
+        width: 500%;
+        height: 500px;
+        box-shadow: none;
+        top: 0;
+
+    }
+
+    .form-box.active {
+        top: 150px;
+        left: 0;
+    }
+
+    .main_logo {
+        overflow: hidden;
+        width: 150px;
+        height: 150px;
+    }
+}

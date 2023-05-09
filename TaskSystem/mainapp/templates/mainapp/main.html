@@ -3,8 +3,25 @@
 {% include 'mainapp/includes/menu_inc.html'%}
 <br>
 <div class='page_style'>
-<h3>Все задачи:</h3>
-{% include 'mainapp/includes/task_inc.html'%}
-</div>
+    {% block content %}
+    <div class="scrum-board" droppable='true'>
+    {% for status in statuses %}
+      <div class="scrum-column" droppable='true'>
+        <h2>{{status}}</h2>
+        <ul class="scrum-list" id="task_list" droppable='true'>
+          {% for item in tasks %} 
+          {%if item.status == status%}
+          <li class='task_item task_list' draggable="true" style="--status-color: {{status.color_status}};"> {{item.tasktype}}
+            <p><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}</p>
+            <p>Автор: {{item.author}}</p>
+            <p>Исполнитель: {% if item.executor == None %} Не назначен {% else %} {{item.executor}} {%endif%}</p>
+          </li>
+          {%endif%}
+          {% endfor %}
+        </ul>
+      </div>
+      {%endfor%}
+      {%endblock%}
+<script type="text/javascript" src="{% static 'js/scrum.js' %}"></script>  
 </body>
 </html>

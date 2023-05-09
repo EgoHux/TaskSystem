@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib import auth
+from django.contrib import auth, messages
 from authapp.forms import CustomUserLoginForm, CustomUserCreationForm, CustomUserChangeForm, UserDataForm
 from authapp.models import CustomUser, UserData, Right
 from django.utils.timezone import now
@@ -11,25 +11,63 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 
 
+# def login(request):
+#     form = CustomUserLoginForm()
+
+#     if request.method == 'POST':
+#         form = CustomUserLoginForm(data=request.POST)
+#         if form.is_valid():
+#             user = auth.authenticate(
+#                 username = form.cleaned_data["username"],
+#                 password = form.cleaned_data["password"],
+#                 LastAuthDate = now()
+#             )
+        
+#             if user:
+#                 auth.login(request, user=user)
+#                 return HttpResponseRedirect(reverse('main'))
+
+#     return render(request, 'authapp/login.html', context={
+#         'title': "Вход в систему",
+#         'form': CustomUserLoginForm()
+#     })
+
 def login(request):
     form = CustomUserLoginForm()
-
+    form_create = CustomUserCreationForm()
     if request.method == 'POST':
         form = CustomUserLoginForm(data=request.POST)
+        form_create = CustomUserCreationForm(data=request.POST)  
+       
         if form.is_valid():
             user = auth.authenticate(
                 username = form.cleaned_data["username"],
                 password = form.cleaned_data["password"],
                 LastAuthDate = now()
             )
-        
-            if user:
+            test = CustomUser.objects.filter(username=user.get_username)
+            messages.error(request, test)
+            if user.is_active == False:    
+                messages.error(request, 'Вы еще не активированы.') 
+            if user.is_active == True:
                 auth.login(request, user=user)
                 return HttpResponseRedirect(reverse('main'))
+        else:
+            messages.error(request, 'Ваш аккаунт еще не активирован или вы указали неверные данные!')    
 
+          
+        if form_create.is_valid():
+            form_create.save()
+            messages.success(request, 'Ваша заявка на регистрацию была отправлена, пожалуйста дождитесь пока её одобрят!')
+            return HttpResponseRedirect(reverse('login'))
+
+            
+    
     return render(request, 'authapp/login.html', context={
         'title': "Вход в систему",
-        'form': CustomUserLoginForm()
+        'form': CustomUserLoginForm(),
+        'form_create': CustomUserCreationForm(),
+        
     })
 
 

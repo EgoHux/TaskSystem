@@ -1,19 +1,74 @@
 .task_container {
-    background-color: #FFE4B5;
-    margin: 50px 500px 50px 50px;
-    padding: 15px 15px 15px 15px;
+
+    margin: 50px 500px 50px 250px;
+    padding: 15px 30px;
+    border-radius: 30px;
+    border-width: 100px;
+    border: 3px solid var(--status-color);
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    position: relative;
+
+}
+
+.task_container::before {
+    content: "";
+    display: block;
+    position: absolute;
+    padding-left: 10px;
+    left: 0;
+    top: 22px;
+    width: 5px;
+    height: 85%;
+    background-color: var(--status-color);
+    border-radius: 0 10px 10px 0;
+}
+
+.task_container_check {
+    margin: 50px 500px 50px 250px;
+    padding: 15px 30px;
+    border-radius: 30px;
+    border-width: 100px;
+    border: 3px solid var(--status-color);
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    position: relative;
+}
+
+.task_container_check::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 250px;
+    top: 0;
+    /* transform: translateX(-50%); */
+    width: 55%;
+    height: 15px;
+    background-color: var(--status-color);
+    border-radius: 0 0 10px 10px;
+}
+
+.status_check {
+    width: 30%;
+    padding: 10px;
+    background-color: red;
+    /* border-radius: 5px; */
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 
 .main_page {
-    background-color: #FFE4B5;
-    margin: 50px 500px 50px 50px;
-    padding: 15px 15px 15px 15px;
+
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin: 50px 500px 50px 250px;
+    padding: 15px 30px;
+    border-radius: 30px;
+    border-width: 100px;
+
 }
 
 .comment_style {
     background-color: rgb(191, 201, 199);
     border-radius: 1%;
     border-width: 100px;
-    
+
 }

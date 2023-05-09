@@ -1,11 +1,13 @@
 {% load static %}
 {% include 'mainapp/includes/menu_inc.html' %}
 
-<div class='page_style_account'>
+<div class="main_page">
+    
 <h3>Мой аккаунт</h3>
 <form method="post">
     {% csrf_token %}</p>
     {{ userform.as_p }}
+
     <h4>Профиль</h4>
     {{userdataform.as_p}}
     <input type="submit" value="Изменить профиль">
