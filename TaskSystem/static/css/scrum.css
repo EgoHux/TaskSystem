@@ -50,6 +50,21 @@
 
 }
 
+.task_list:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.task_list:hover::before {
+    opacity: 0.8;
+}
+
+.task_list::before {
+    background-color: var(--status-color);
+
+}
+
+
 .done_list::before {
     background-color: greenyellow;
 

@@ -3,10 +3,10 @@
 {% for task in tasks %}
 
 <div class="task_container">
+  <p>{{task.status}}</p>
   <a href={%url 'task' task.id %}><h4>Задача № {{task.id}}</h4></a>
-  <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Отсутсвтует {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
+  <p> Заказчик: {{task.author}} | Исполнитель: {% if task.executor != None %} {{task.executor}} {%else%} Не назначен {% endif %}| Статус: {{ task.status }} | Тип: {{ task.tasktype }}</p>
   <p>Заголовок: {{task.title}} </p>
-  
   
   
   <hr>

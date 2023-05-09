@@ -21,13 +21,13 @@
 
   <header class='header'>
     <div class='block-logo'>
-      <a href='{% url 'main' %}' class="logo"><img src="{% static 'images/TSlogo.png' %}" width="50" height="50"></a>
-      <p class='logo-text'><a href='{% url 'main' %}' class='logo-text'>TaskSystem</a></p>
+      <a href='{% url "main" %}' class="logo"><img src="{% static 'images/TSlogo.png' %}" width="50" height="50"></a>
+      <p class='logo-text'><a href='{% url "main" %}' class='logo-text'>TaskSystem</a></p>
     </div>
     <nav class='menu-items'>
       <ul class='menu-item'>
         
-        <li><a href="{% url 'test_main' %}" class="{% if request.resolver_match.url_name == 'test_main' %} active_url {% endif %}">SCRUM</a></li>
+        <li><a href="{% url 'main' %}" class="{% if request.resolver_match.url_name == 'main' %} active_url {% endif %}">SCRUM</a></li>
         <li><a href="{% url 'mytasks:task_view' %}" class="{% if request.resolver_match.url_name == 'task_view' %} active_url  {% endif %}">Мои задачи</a></li>
         {% if right.usertype_id.name == "Руководитель" or right.usertype_id.name == "Администратор" %}
         <li><a href="{% url 'create' %}" class="{% if request.resolver_match.url_name == 'create' %} active_url{% endif %}">Создать задачу</a></li>
