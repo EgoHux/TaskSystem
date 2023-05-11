@@ -4,24 +4,34 @@
 <br>
 <div class='page_style'>
     {% block content %}
-    <div class="scrum-board" droppable='true'>
+    <div class="scrum-board" >
     {% for status in statuses %}
-      <div class="scrum-column" droppable='true'>
+      <div class="scrum-column" data-status="{{status.id}}" >
         <h2>{{status}}</h2>
-        <ul class="scrum-list" id="task_list" droppable='true'>
+        <ul class="scrum-list" id="task_list" droppable="true">
+          {% if not status.children.exists %}
+            <li class="empty-placeholder">+</li>
+        {% endif %}
+
           {% for item in tasks %} 
           {%if item.status == status%}
-          <li class='task_item task_list' draggable="true" style="--status-color: {{status.color_status}};"> {{item.tasktype}}
+
+         
+          <li class='task_item task_list' draggable="true" data-task-id="{{item.id}}" style="--status-color: {{status.color_status}};"> {{item.tasktype}}
             <p><a href={%url 'task' item.id %}> Задача № {{item.id}}</a> {{ item.title }}</p>
             <p>Автор: {{item.author}}</p>
             <p>Исполнитель: {% if item.executor == None %} Не назначен {% else %} {{item.executor}} {%endif%}</p>
           </li>
+          {% comment %} {%else%}
+          <li class="empty-placeholder"></li> {% endcomment %}
           {%endif%}
           {% endfor %}
         </ul>
       </div>
       {%endfor%}
       {%endblock%}
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scrum.js' %}"></script>  
 </body>
 </html>

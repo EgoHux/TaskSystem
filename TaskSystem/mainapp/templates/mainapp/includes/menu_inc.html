@@ -35,7 +35,7 @@
         {% endif %}
         {% if request.user.is_superuser %}
         <li><a href="{% url 'edit_directory:directory_view' %} " class="{% if request.resolver_match.url_name == 'directory_view' %} active_url {% endif %}">Редактирование справочников</a></li>
-        <li><a href="{% url 'all_users' %}" >Все пользователи</a></li>
+        <li><a href="{% url 'all_users' %}" class="{% if request.resolver_match.url_name == 'all_users' %} active_url {% endif %}">Все пользователи</a></li>
         {% endif %}
         <li><a href="#" class="{% if request.resolver_match.url_name == 'account' %} active_url {% endif %}">{{ user.username }} {% if right.usertype_id.name %}[{{right.usertype_id.name}}]{% else %} [Не определен] {% endif %}</a>
         <ul>
