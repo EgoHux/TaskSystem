@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'authapp',
     'mytasks',
     'edit_directory',
+    'django_static_jquery',
     'colorfield'
 ]
 

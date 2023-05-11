@@ -13,6 +13,7 @@ from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 import pickle
 # Create your views here.
 
@@ -67,15 +68,20 @@ def test_main(request):
 
 @csrf_exempt
 def update_task_status(request):
-    if request.method == "POST":
-        task_id = request.POST.get("task_id")
-        new_status = request.POST.get("new_status")
-
+    if request.method == 'POST':
+        # Получаем данные из POST-запроса
+        task_id = request.POST.get('task_id')
+        status_id = request.POST.get('status_id')
+        # Изменяем статус задачи
         task = Task.objects.get(id=task_id)
-        task.status = new_status
+        status = Status.objects.get(id=status_id)
+        task.status = status
         task.save()
+        # Возвращаем успешный ответ в формате JSON
+        return JsonResponse({'success': True})
+    # В случае неправильного метода запроса возвращаем ошибку
+    return JsonResponse({'success': False, 'message': 'Метод запроса должен быть POST'})
 
-        return JsonResponse({"status": "success"})
 
 @login_required
 def task(request, pk):

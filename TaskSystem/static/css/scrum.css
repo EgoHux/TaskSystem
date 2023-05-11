@@ -118,3 +118,14 @@
 .todo-list:hover::before {
     opacity: 0.8;
 }
+
+.empty-placeholder {
+    height: 50px;
+    background-color: #eee;
+    border: 1px dashed #ccc;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
